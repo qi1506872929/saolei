@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="./index.css">
+  <script src="./vue.js"></script>
+  <title>扫雷</title>
+</head>
+
+<body>
+  <div id="app">
+    <div class="header">
+      <ul class="difficulty" @click="changeDifficulty">
+        <li>简单</li>
+        <li>复杂</li>
+        <li>困难</li>
+      </ul>
+    </div>
+    <div class="content" :class="{ 'game-over': isGameOver }">
+      <ul class="box-list" :class="{ 'low': difficulty === 0, 'mid': difficulty === 1, 'high': difficulty === 2, }"
+        @click.left.capture="boxClcik" @click.right.capture="boxClickRight" @dblclick.capture="boxDblClick" @selectstart.prevent>
+        <li class="box-item" v-for="item in boxList" :key="`${row * row}-${item.index}`" :class="{ 'isShow': item.isShow }">
+          <template v-if="item.tagNum === 1">
+            <i class="fa fa-flag" aria-hidden="true"></i>
+          </template>
+          <template v-else-if="item.tagNum === 2">
+            <span class="isQuestion">?</span>
+          </template>
+          <template v-else-if="item.isRay">
+            <i class="fa fa-bomb" aria-hidden="true"></i>
+          </template>
+          <template v-else>
+            <span>{{ item.value === 0 ? '' : item.value }}</span>
+          </template>
+          <i class="fa fa-close dbl-error" aria-hidden="true"></i>
+        </li>
+      </ul>
+      <button class="startOver" @click="startOver">重新开始</button>
+    </div>
+    <div class="footer">
+      剩余雷数: {{ this.restRays }}
+      <span v-show="isGameOver" class="gameOverText">{{ this.gameOverTips }}</span>
+    </div>
+  </div>
+  <script src="./index.js"></script>
+</body>
+
+</html>

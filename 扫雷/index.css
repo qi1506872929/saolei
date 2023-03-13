@@ -1,0 +1,155 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+#app {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+  user-select: none;
+}
+
+.header {
+  height: 30px;
+  line-height: 30px;
+}
+
+.difficulty {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.content {
+  position: relative;
+}
+.game-over::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.content > .startOver {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  background-color: silver;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0px 0px 5px 2px rgb(172 179 203 / 65%);
+}
+.game-over > .startOver {
+  display: inline-block;
+}
+.game-over > .startOver:hover {
+  opacity: 0.8;
+}
+
+.box-list {
+  display: flex;
+  flex-wrap: wrap;
+  border-right: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+.low {
+  width: 200px;
+}
+.mid {
+  width: 400px;
+}
+.high {
+  width: 625px;
+}
+
+.box-item {
+  width: 25px;
+  height: 25px;
+  border-left: 1px solid #eee;
+  border-top: 1px solid #eee;
+  box-sizing: border-box;
+  line-height: 25px;
+  text-align: center;
+  background-color: #ddd;
+  color: transparent;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+.box-item:hover {
+  opacity: 0.8;
+}
+.box-item.isShow {
+  background-color: inherit;
+  color: #242425;
+}
+.box-item.isShow:hover {
+  opacity: 1;
+}
+.box-item .fa-flag {
+  color: crimson;
+  cursor: default;
+}
+.box-item.isShow .fa-bomb {
+  color: crimson;
+  cursor: default;
+}
+.box-item .isQuestion {
+  color: #444;
+}
+.dbl-error {
+  color: crimson;
+  font-size: 16px;
+  visibility: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  line-height: 25px;
+}
+.dbl-error.error-animation {
+  visibility: visible;
+  animation: dblclickError 1s linear;
+}
+
+.footer {
+  padding: 10px 0;
+}
+
+.footer .gameOverText {
+  margin-left: 20px;
+}
+
+@keyframes dblclickError {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
